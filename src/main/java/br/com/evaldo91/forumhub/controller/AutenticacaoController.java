@@ -4,6 +4,7 @@ package br.com.evaldo91.forumhub.controller;
 import br.com.evaldo91.forumhub.domain.usuario.Usuario;
 import br.com.evaldo91.forumhub.infra.security.TokenJWT;
 import br.com.evaldo91.forumhub.infra.security.TokenService;
+import br.com.evaldo91.forumhub.infra.services.autenticacao.DadosAutenticacao;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

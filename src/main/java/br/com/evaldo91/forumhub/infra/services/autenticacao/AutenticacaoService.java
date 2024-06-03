@@ -1,5 +1,6 @@
-package br.com.evaldo91.forumhub.domain.usuario;
+package br.com.evaldo91.forumhub.infra.services.autenticacao;
 
+import br.com.evaldo91.forumhub.domain.usuario.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

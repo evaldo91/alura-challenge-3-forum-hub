@@ -1,4 +1,4 @@
-package br.com.evaldo91.forumhub.controller;
+package br.com.evaldo91.forumhub.infra.services.autenticacao;
 
 public record DadosAutenticacao(
         String email,
