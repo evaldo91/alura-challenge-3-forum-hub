@@ -5,12 +5,14 @@ import br.com.evaldo91.forumhub.domain.resposta.RespostaDTO;
 import br.com.evaldo91.forumhub.domain.topico.*;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("topico")
@@ -39,4 +41,17 @@ public class TopicoController {
         var dto = resposta.novaResposta(dados);
         return ResponseEntity.ok(dto);
     }
+
+
+    @GetMapping
+    public ResponseEntity<Page<ListagemTopicoDTO>> listar(@PageableDefault(size = 10, sort = {"dataCriacao"}) Pageable paginacao) {
+        var page = repository.findAll(paginacao).map(ListagemTopicoDTO::new);
+        return ResponseEntity.ok(page);
+    }
+    @GetMapping("/{id}")
+    public ResponseEntity detalhar(@PathVariable Long id) {
+        var topico = repository.getReferenceById(id);
+        return ResponseEntity.ok(new DetalhamentoTopico(topico));
+    }
+
 }

@@ -24,6 +24,7 @@ public class CriarResposta {
         var data = LocalDateTime.now();
         var usuario = usuarioRepository.getReferenceById(dados.idUsuario());
         var topico = topicoRepository.getReferenceById(dados.idTopico());
+        topico.atualizarStatus();
         var resposta = new Resposta(null, dados.mensagem(), data, usuario, topico);
 
         respostaRepository.save(resposta);
