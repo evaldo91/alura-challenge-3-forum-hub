@@ -19,8 +19,4 @@ public record DetalhamentoTopico (
         this(topico.getId(), topico.getTitulo(), topico.getMensagem(),
                 topico.getDataCriacao(), topico.getStatus(), topico.getUsuario().getNome(), topico.getCurso().getNome());
     }
-
-    public static List<DetalhamentoTopico> converter(List<Topico> topicos) {
-        return topicos.stream().map(DetalhamentoTopico::new).collect(Collectors.toList());
-    }
     }
