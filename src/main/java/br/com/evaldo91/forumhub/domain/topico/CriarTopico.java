@@ -17,26 +17,15 @@ public class CriarTopico {
     @Autowired
     private CursoRepository cursoRepository;
 
-    public  DetalhamentoTopico novoTopico(CriarTopicoDTO dados) {
-
-
-
+    public DetalhamentoTopico novoTopico(CriarTopicoDTO dados) {
         var data = LocalDateTime.now();
         var status = "nao respondido";
         var usuario = usuarioRepository.getReferenceById(dados.idUsuario());
         var curso = cursoRepository.getReferenceById(dados.idCurso());
 
-
-
-
         var topico = new Topico(null, dados.titulo(), dados.mensagem(), data, status, usuario, curso);
 
         topicoRepository.save(topico);
         return new DetalhamentoTopico(topico);
-
-
-
-
-
     }
 }

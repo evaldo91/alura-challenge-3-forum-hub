@@ -9,8 +9,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-@Table(name = "respotas")
-@Entity
+
+@Table(name = "respostas")
+@Entity(name = "resposta")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,9 +21,7 @@ public class Resposta {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
     private String mensagem;
-
 
     private LocalDateTime dataCriacao;
 
@@ -33,5 +32,4 @@ public class Resposta {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "topico_id")
     private Topico topico;
-
 }

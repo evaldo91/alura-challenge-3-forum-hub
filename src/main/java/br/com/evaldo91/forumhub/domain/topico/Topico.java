@@ -2,16 +2,21 @@ package br.com.evaldo91.forumhub.domain.topico;
 
 import br.com.evaldo91.forumhub.domain.curso.Curso;
 import br.com.evaldo91.forumhub.domain.usuario.Usuario;
+import br.com.evaldo91.forumhub.domain.resposta.Resposta;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Table(name = "topicos")
-@Entity
+@Entity(name = "topico")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -22,12 +27,9 @@ public class Topico {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
     private String titulo;
 
-
     private String mensagem;
-
 
     private LocalDateTime dataCriacao;
 
@@ -42,10 +44,33 @@ public class Topico {
     @JoinColumn(name = "curso_id")
     private Curso curso;
 
-    public void atualizarStatus(){
+    @OneToMany(mappedBy = "topico", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Resposta> respostas = new ArrayList<>();
+
+    public Topico(Long id, String titulo, String mensagem, LocalDateTime dataCriacao, String status, Usuario usuario, Curso curso) {
+        this.id = id;
+        this.titulo = titulo;
+        this.mensagem = mensagem;
+        this.dataCriacao = dataCriacao;
+        this.status = status;
+        this.usuario = usuario;
+        this.curso = curso;
+    }
+    @Autowired
+    private TopicoRepository repository;
+
+    public void atualizarStatus() {
         this.status = "respondido";
     }
 
+    public void novo(AtulizarTopicoDTO dados) {
+        if (dados.titulo()  !=null){
+            this.titulo = dados.titulo();
+        }
+         if(dados.mensagem() !=null){
+            this.mensagem = dados.mensagem();;
+        }
 
 
+    }
 }

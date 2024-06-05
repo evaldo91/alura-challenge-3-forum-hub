@@ -19,7 +19,7 @@ public class CriarResposta {
     @Autowired
     private RespostaRepository respostaRepository;
 
-    public DetalhamentoResposta novaResposta(RespostaDTO dados) {
+    public DetalhamentoResposta respondendo(RespostaDTO dados) {
 
         var data = LocalDateTime.now();
         var usuario = usuarioRepository.getReferenceById(dados.idUsuario());
